@@ -54,7 +54,9 @@ namespace inFileSearch
 
             Console.WriteLine("Search Complete");
             if (!isFound)
+            {
                 Console.WriteLine("File Not found");
+            }
             Console.ReadLine();
         }
     }
