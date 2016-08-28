@@ -11,6 +11,7 @@ namespace inFileSearch
     {
         static void Main(string[] args)
         {
+            //Used to give the user one final warning that nothing was found
             bool isFound = false;
             try
             {
@@ -19,40 +20,38 @@ namespace inFileSearch
                 Console.Write("Input word > ");
                 string wordToFind = Console.ReadLine();
                 string[] files = Directory.GetFiles(loc);
-                
 
                 foreach (string str in files)
                 {
+                    //The two main file formats used by cataclysm DDA
                     if ((Path.GetExtension(str) == ".txt") || (Path.GetExtension(str) == ".json"))
                     {
-                        //Console.WriteLine(str);
+                        //This comment intentionally left blank
                         StreamReader sr = new StreamReader(str);
-                        //Console.WriteLine(sr.ReadToEnd());
                         string stream = sr.ReadToEnd();
                         List<string> wordList = new List<string>();
                         wordList = stream.Split(' ').ToList();
-                        foreach(string wStr in wordList)
+                        foreach (string wStr in wordList)
                         {
                             if (wStr.ToLower() == wordToFind.ToLower())
                             {
+                                //No line number given in page, but can use ctrl+f to find the specific word
                                 Console.WriteLine("Word found in {0}", str);
                                 isFound = true;
                             }
                         }
                     }
-                    else
-                    {
-                        //Console.WriteLine("{0} not readable", str);
-                    }
                 }
             }
-
+            
+            //No need to catch the exception since there is only one possible exception here
             catch
             {
                 Console.WriteLine("Error: Folder Not Found");
             }
 
             Console.WriteLine("Search Complete");
+
             if (!isFound)
             {
                 Console.WriteLine("File Not found");
