@@ -44,7 +44,7 @@ namespace inFileSearch
                 }
             }
             
-            //No need to catch the exception since there is only one possible exception here
+            //No need to get the info on the exception since there is only one possible exception here
             catch
             {
                 Console.WriteLine("Error: Folder Not Found");
